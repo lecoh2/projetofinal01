@@ -1,0 +1,48 @@
+﻿@model ContatosApp.MVC.Models.Contatos.ContatosEditViewModel
+
+@{
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+
+
+<h3>Editar contato</h3>
+
+<hr />
+
+<div class="text-danger">
+    @Html.ValidationSummary()
+</div>
+
+<div class="mb-3">
+    <h4 class="text-success">@TempData["MensagemSucesso"]</h4>
+    <h4 class="text-danger">@TempData["MensagemErro"]</h4>
+</div>
+
+@using (Html.BeginForm("Editar", "Contatos", FormMethod.Post))
+{
+    <div class="row mb-3">
+        <div class="col-md-6">
+            @Html.HiddenFor(model=>model.Id)
+            @Html.LabelFor(model => model.Nome)
+            @Html.TextBoxFor(model => model.Nome, new { @class = "form-control" })
+          
+        </div>
+        <div class="col-md-3">
+            <label>E-mail</label>
+            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @type = "email" })
+        </div>
+        <div class="col-md-3">
+            <label>Telefone:</label>
+            @Html.TextBoxFor(model => model.Telefone, new { @class = "form-control" })
+        </div>
+
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <input type="submit" class="btn btn-success" value="Editar" />
+        </div>
+    </div>
+}
+
+   

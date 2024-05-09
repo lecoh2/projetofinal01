@@ -1,0 +1,59 @@
+﻿@model ContatosApp.MVC.Models.Contatos.ContatosConsultaViewModel
+
+@using ContatosApp.MVC.Models.Contatos
+@{
+    var contatos = new List<ContatosViewModel>();
+    if(TempData["Contatos"] !=null){
+        contatos = (List<ContatosViewModel>)TempData["Contatos"];
+    }
+}
+@{
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<h3>Consulta de tarefas</h3>
+<p>Listagem de tarefas cadastradas.</p>
+<hr />
+<div class="text-danger">
+    @Html.ValidationSummary()
+  
+</div>
+<div class="mb-3">
+    <h4 class="text-success">@TempData["MensagemSucesso"]</h4>
+    <h4 class="text-danger">@TempData["MensagemErro"]</h4>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th>Operações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in contatos)
+            {
+                <tr>
+                    <td>@item.Nome</td>
+                    <td>@item.Email</td>
+                    <td>@item.Telefone</td>
+                    <td>
+
+                     
+                        <a href="/Contatos/Editar/@item.Id" class="btn btn-sm btn-primary me-2">Editar</a>
+                        <a href="/Contatos/Excluir/@item.Id" class="btn btn-sm btn-danger me-2">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4">
+                    Quantidade de registros: <span>@contatos.Count</span>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
